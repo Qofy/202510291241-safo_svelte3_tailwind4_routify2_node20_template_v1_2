@@ -9,6 +9,9 @@
 
   import {onMount} from "svelte";
   import * as monaco from 'monaco-editor';
+  import {Terminal} from "xterm";
+  import {FitAddon} from "xterm-addon-fit"
+  // import {fitAddon} from "xterm"
 
 	import TopBar from "../components/TopBar.svelte";
 	import Sidebar from "../components/Sidebar.svelte";
@@ -426,7 +429,7 @@ function renderFileTabs() {
   const existingTabs = tabsContainer.querySelectorAll('.file-tab');
   existingTabs.forEach(tab => tab.remove());
 
-  // const splitBtn = document.getElementById('split-view-toggle');
+   const splitBtn = document.getElementById('split-view-toggle');
 
 
   openFiles.forEach((fileData, path) => {
@@ -1530,8 +1533,8 @@ let termLineBuf = '';
 function ensureTerminalStarted() {
   if (termStarted) return;
   termStarted = true;
-  terminal = new window.Terminal({ cursorBlink: true, fontSize: 13, theme: { background: '#0b0e14', foreground: '#cbd5e1' } });
-  fitAddon = new window.FitAddon.FitAddon();
+  terminal = new Terminal({ cursorBlink: true, fontSize: 13, theme: { background: '#0b0e14', foreground: '#cbd5e1' } });
+  fitAddon = new FitAddon();
   const linkAddon = new window.WebLinksAddon.WebLinksAddon();
   terminal.loadAddon(fitAddon); terminal.loadAddon(linkAddon);
   terminal.open(xtermEl);
@@ -1789,3 +1792,22 @@ function setupTerminalFileDetection() {
 
 <slot />
 
+<style>
+   #container { display: grid; grid-template-columns: 300px 4px 1fr; height: calc(100% - 44px); }
+
+   /* Resizable dividers */
+    .divider-vertical {
+      width: 4px;
+      background: transparent;
+      cursor: col-resize;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .divider-vertical:hover {
+      background: var(--accent);
+    }
+    .hidden { display:none !important; }
+
+    
+
+</style>

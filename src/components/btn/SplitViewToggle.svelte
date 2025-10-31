@@ -41,3 +41,28 @@ export let splitEditor ={}
             </svg>
             Split
           </button>
+
+<style>
+      /* Split view button */
+    .split-view-btn {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--btn);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+    }
+    .split-view-btn:hover {
+      background: var(--btnh);
+      border-color: var(--accent);
+    }
+    .split-view-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+</style>

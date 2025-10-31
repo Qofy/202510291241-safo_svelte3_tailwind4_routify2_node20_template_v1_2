@@ -6,7 +6,7 @@
   import Notification from './components/Notification.svelte';
 </script>
 
-<div class="min-h-screen bg-black text-white p-6 flex h-full">
+<div class="bg-black text-white flex">
   <Router {routes} />
   <Notification />
 </div>

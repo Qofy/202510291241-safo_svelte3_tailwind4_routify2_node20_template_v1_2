@@ -106,9 +106,8 @@
     button { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--btn); color: var(--text); cursor: pointer; }
     button:hover { background: var(--btnh); }
     .tag { padding: 3px 8px; border:1px solid var(--border); border-radius:999px; color: var(--muted); }
-    #container { display: grid; grid-template-columns: 300px 4px 1fr; height: calc(100% - 44px); }
-    #sidebar { border-right: 1px solid var(--border); background: var(--panel); overflow: auto; display: flex; flex-direction: column; }
-    #sidebar-top { padding: 8px; display: flex; gap: 6px; align-items: center; border-bottom: 1px solid var(--border); }
+   
+   
     #file-search { flex: 1 1 auto; background:#10131a; border:1px solid var(--border); border-radius:8px; padding:6px 8px; color: var(--text); }
     #files { padding: 10px; margin: 0; list-style: none; font-size: 13px; }
     #files li { padding: 2px 2px; }
@@ -117,79 +116,21 @@
     .twisty { width: 12px; color: #a6accd; }
     .fname { color: #cbd5e1; }
     .dim { color: var(--muted); }
-    #main { display: grid; grid-template-rows: 1fr 260px; background: var(--bg2); }
-    #editor-area { display: flex; flex-direction: column; }
+  
     #editor-tabs { display: flex; gap: 4px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; overflow-x: auto; }
-    #editor-tabs::-webkit-scrollbar { height: 6px; }
-    #editor-tabs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-    .file-tab { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px 6px 0 0; background: #111724; cursor: pointer; font-size: 13px; transition: all 0.2s; user-select: none; position: relative; }
-    .file-tab:hover { background: #1a2138; }
-    .file-tab.active { background: var(--bg2); border-bottom-color: var(--bg2); color: var(--accent); }
-    .file-tab .save-indicator { width: 8px; height: 8px; border-radius: 50%; background: #fbbf24; display: none; }
-    .file-tab.dirty .save-indicator { display: block; }
-    .file-tab .close-btn { opacity: 0; margin-left: 4px; padding: 0 4px; cursor: pointer; }
-    .file-tab:hover .close-btn { opacity: 1; }
-    .file-tab .close-btn:hover { color: #ef4444; }
-    #editor-container { flex: 1; display: grid; grid-template-columns: 1fr 0; position: relative; }
-    #editor { height: 100%; }
-    #editor-split { height: 100%; display: none; }
-    #preview { border-left: 1px solid var(--border); padding: 12px; overflow: auto; background:#0a0f17; }
-    #bottom { border-top: 1px solid var(--border); background: #0c111b; display: grid; grid-template-rows: 36px 1fr; }
+  
+   
+    
+    
+   
     #tabs { display: flex; gap: 6px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; }
-    .tab {
-      padding: 6px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #111724;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      user-select: none;
-      position: relative;
-    }
-    .tab:hover {
-      background: #1a2138;
-      border-color: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    .tab.active {
-      background: #172034;
-      color: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 2px 4px rgba(82, 178, 255, 0.2);
-    }
-    .tab.active::after {
-      content: '';
-      position: absolute;
-      bottom: -7px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 2px;
-    }
 
-    /* Resizable dividers */
-    .divider-vertical {
-      width: 4px;
-      background: transparent;
-      cursor: col-resize;
-      position: relative;
-      transition: background 0.2s;
-    }
+
+    
     .divider-vertical:hover, .divider-vertical.dragging {
       background: var(--accent);
     }
-    .divider-horizontal {
-      height: 4px;
-      background: transparent;
-      cursor: row-resize;
-      position: relative;
-      transition: background 0.2s;
-    }
+  
     .divider-horizontal:hover, .divider-horizontal.dragging {
       background: var(--accent);
     }
@@ -221,37 +162,9 @@
       transform: rotate(180deg);
     }
 
-    /* Split view button */
-    .split-view-btn {
-      padding: 6px 10px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: var(--btn);
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-left: auto;
-    }
-    .split-view-btn:hover {
-      background: var(--btnh);
-      border-color: var(--accent);
-    }
-    .split-view-btn svg {
-      width: 14px;
-      height: 14px;
-    }
 
-    /* Bottom panel collapse states */
-    #bottom { transition: grid-template-rows 0.3s ease; }
-    #bottom.collapsed {
-      grid-template-rows: 36px 0 !important;
-    }
-    #bottom.collapsed .panel {
-      display: none !important;
-    }
+
+  
 
     #log, #termlog, #xterm, #search-results { padding: 8px; overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; white-space: pre-wrap; }
     #log { display: block; }
@@ -294,27 +207,15 @@
     .tabs button { padding: 6px 10px; border: 1px solid var(--border); background: var(--btn-bg); cursor: pointer; }
 .tabs button:active { transform: translateY(1px); filter: brightness(0.95); } /* keydown/keyup visual */
 .tabs button.active { background: var(--btn-active); }
-.panel {
-  display: none;
-  overflow: auto;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.panel.active {
-  display: block;
-  opacity: 1;
-  animation: fadeInPanel 0.2s ease;
-}
+
 @keyframes fadeInPanel {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 /* 6) Horizontal growth + on collapse resize */
 .main { display: flex; height: calc(100vh - var(--toolbar-h)); }
-.sidebar { width: 260px; min-width: 180px; max-width: 480px; }
-.sidebar.collapsed { width: 0; min-width: 0; }
-.editor-wrap { flex: 1 1 auto; min-width: 0; display: flex; }
-#editor { flex: 1 1 auto; min-width: 0; }
+
+
 
 /* Toast animations */
 @keyframes slideIn {
@@ -326,40 +227,7 @@
   to { transform: translateX(400px); opacity: 0; }
 }
 
-/* Command Palette */
-#command-palette {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 15vh;
-  animation: fadeIn 0.15s ease;
-}
 
-#command-palette.hidden {
-  display: none;
-}
-
-#command-palette-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(2px);
-}
-
-#command-palette-container {
-  position: relative;
-  width: 90%;
-  max-width: 640px;
-  background: var(--panel);
-  border: 1px solid var(--accent);
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(97, 218, 251, 0.1);
-  overflow: hidden;
-  animation: slideDown 0.2s ease;
-}
 
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -371,51 +239,6 @@
   to { transform: translateY(0); opacity: 1; }
 }
 
-#command-palette-header {
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
-
-#command-palette-input {
-  width: 100%;
-  padding: 18px 20px;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-size: 16px;
-  font-family: inherit;
-  outline: none;
-}
-
-#command-palette-input::placeholder {
-  color: var(--muted);
-}
-
-#command-palette-hint {
-  padding: 8px 20px 12px;
-  font-size: 12px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-#command-palette-hint kbd {
-  background: var(--btn);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-family: monospace;
-  font-size: 11px;
-  color: var(--text);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
-
-#command-palette-results {
-  max-height: 60vh;
-  overflow-y: auto;
-  padding: 8px 0;
-}
 
 .cmd-item {
   display: flex;

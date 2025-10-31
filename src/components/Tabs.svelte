@@ -24,3 +24,41 @@ let ws = null;
           <ButtonRunnerStop {ws}/>
          <ButtonFmt {ws}/>
         </div>
+
+        <style>
+              .tab {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #111724;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      user-select: none;
+      position: relative;
+    }
+    .tab:hover {
+      background: #1a2138;
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .tab.active {
+      background: #172034;
+      color: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 2px 4px rgba(82, 178, 255, 0.2);
+    }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+        </style>
