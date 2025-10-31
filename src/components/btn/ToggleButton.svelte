@@ -1,6 +1,6 @@
 <script>
+	import { editor } from "monaco-editor";
 	import { onMount } from "svelte";
-
   onMount(()=>{
 document.getElementById('toggle-bottom-panel').onclick = () => {
   const bottomPanel = document.getElementById('bottom');
@@ -11,7 +11,7 @@ document.getElementById('toggle-bottom-panel').onclick = () => {
 
   // Trigger Monaco editor resize
   setTimeout(() => {
-    if (editor) editor.layout();
+    if (editor && typeof editor.layout ==="function") editor.layout();
     if (editorSplit) editorSplit.layout();
   }, 300);
 };

@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from "svelte";
-
+export let ws = null;
   onMount(()=>{
     document.getElementById('btn-fmt').onclick = () => {
   if (ws && ws.readyState === WebSocket.OPEN) {

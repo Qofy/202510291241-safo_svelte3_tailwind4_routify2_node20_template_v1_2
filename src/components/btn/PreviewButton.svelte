@@ -3,6 +3,8 @@
  export let currentPath = null;
  export let previewEl;
   onMount(()=>{
+ previewEl = document.getElementById('preview');
+
     document.getElementById('btn-preview').onclick = () => togglePreview();
   })
 

@@ -6,7 +6,7 @@
 	import ButtonRunnerStop from "./btn/ButtonRunnerStop.svelte";
 	import ToggleButton from "./btn/ToggleButton.svelte";
 
-
+let ws = null;
 </script>
 
  <div id="tabs">
@@ -19,9 +19,9 @@
           <div id="tab-log" class="tab" data-tab="log">Log</div>
           <div id="tab-xterm" class="tab" data-tab="xterm">Xterm</div>
           <div id="tab-termlog" class="tab" data-tab="termlog">Xtermlog</div>
-          <ButtonGear/>
-          <ButtonRunnerStart/>
-          <ButtonRestart/>
-          <ButtonRunnerStop/>
+          <ButtonGear {ws}/>
+          <ButtonRunnerStart {ws}/>
+          <ButtonRestart {ws}/>
+          <ButtonRunnerStop {ws}/>
          <ButtonFmt/>
         </div>

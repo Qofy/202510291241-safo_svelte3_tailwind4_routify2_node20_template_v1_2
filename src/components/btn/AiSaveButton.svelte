@@ -1,7 +1,10 @@
 <script>
 	import { onMount } from "svelte";
-
+  let ws = null;
+let aiModal
   onMount(()=>{
+    aiModal = document.getElementById('ai-modal')
+
     document.getElementById('ai-save').onclick = () => {
   const cfg = {
     provider: document.getElementById('ai-provider').value,
