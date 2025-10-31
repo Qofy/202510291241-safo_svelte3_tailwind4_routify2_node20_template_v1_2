@@ -1,0 +1,65 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+/node_modules/
+/dist/
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+.routify
+.temp_keys
+pnpm-lock.yaml
+
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+.netlify
+.temp_keys
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+archive.tar.gz
+files_to_upload.tar.gz
+# .nurignore_files
+# .nurignore_dirs
+# .ersetzeignore_files
+# .ersetzeignore_dirs
+# .oeignore_files
+# .oeignore_dirs
+bun.lockb
+bun.lock
+bun.lockb
+package-lock.json
+node_modules
+.vscode
+.routify
+dist
+build
+.yarn
+vendor
+deps
+pnpm-lock.yaml
+chatgipity
+.routify
+.swapper.bash

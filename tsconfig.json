@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "strict": false,
+    "target": "esNext",
+    "module": "esNext",
+    "moduleResolution": "node",
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@test/*": ["./__test__/*"]
+    }
+  },
+  "include": [ "src/**/*", "__test__/**/*", "server _2", "server _2", "server _2/static/vendor", "server _2/static/vendor" ],
+  "exclude": ["server _2/static/vendor","deps",".yarn","build","dist",".routify","node_modules", "public"]
+}

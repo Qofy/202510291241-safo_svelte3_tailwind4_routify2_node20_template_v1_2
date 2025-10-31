@@ -1,0 +1,6 @@
+[
+    {
+        "find": "@assets",
+        "replacement": "./public/assets"
+    }
+]
