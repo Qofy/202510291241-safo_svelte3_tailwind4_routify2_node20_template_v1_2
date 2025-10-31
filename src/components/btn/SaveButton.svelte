@@ -1,6 +1,33 @@
 <script>
 	import { onMount } from "svelte";
 
+ export let currentPath = null;
+
+ function toast(message, duration = 3000) {
+  const toastEl = document.createElement('div');
+  toastEl.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2a3242;
+    color: #d7dde8;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #61dafb;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+    font-size: 14px;
+    animation: slideIn 0.3s ease;
+  `;
+  toastEl.textContent = message;
+  document.body.appendChild(toastEl);
+
+  setTimeout(() => {
+    toastEl.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => toastEl.remove(), 300);
+  }, duration);
+}
+
   onMount(()=>{
 document.getElementById('btn-save').onclick = () => saveCurrentFile();
   })

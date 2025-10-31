@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
-
+ export let currentPath = null;
+ export let previewEl;
   onMount(()=>{
     document.getElementById('btn-preview').onclick = () => togglePreview();
   })
@@ -18,5 +19,6 @@
   }
 };
 </script>
+
 
     <button id="btn-preview">Preview</button>

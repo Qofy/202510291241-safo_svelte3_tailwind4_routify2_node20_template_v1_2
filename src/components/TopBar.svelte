@@ -11,7 +11,9 @@
 	import PreviewButton from "./btn/PreviewButton.svelte";
 	import SaveButton from "./btn/SaveButton.svelte";
 
-  export let ws = null
+ export let currentPath = null;
+  export let ws = null;
+  let terminal = false
 
 </script>
 
@@ -20,9 +22,9 @@
     <ButtonRust {ws}/>
     <ButtonTs {ws}/>
     <ButtonCheck {ws}/>
-    <SaveButton/>
-    <ButtonClear/>
-    <PreviewButton/>
+    <SaveButton {currentPath}/>
+    <ButtonClear {terminal}/>
+    <PreviewButton {currentPath}/>
     <span class="tag">Workspace</span><span id="ws-path" class="dim"></span>
     <span id="status" class="status">—</span>
   </div>

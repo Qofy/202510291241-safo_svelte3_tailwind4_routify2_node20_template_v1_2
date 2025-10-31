@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 
+  export let terminal = false
   onMount(()=>{
     document.getElementById('btn-clear').onclick = () => {
   const logEl = document.getElementById('log');
