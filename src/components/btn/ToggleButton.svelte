@@ -1,6 +1,8 @@
 <script>
 	import { editor } from "monaco-editor";
 	import { onMount } from "svelte";
+
+  export let editorSplit = null;
   onMount(()=>{
 document.getElementById('toggle-bottom-panel').onclick = () => {
   const bottomPanel = document.getElementById('bottom');

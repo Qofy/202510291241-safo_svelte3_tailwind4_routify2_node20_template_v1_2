@@ -8,7 +8,6 @@
 
 let ws = null;
 </script>
-
  <div id="tabs">
           <ToggleButton/>
           <div id="tab-lsp" class="tab active" data-tab="lsp">LSPsd</div>
@@ -23,5 +22,5 @@ let ws = null;
           <ButtonRunnerStart {ws}/>
           <ButtonRestart {ws}/>
           <ButtonRunnerStop {ws}/>
-         <ButtonFmt/>
+         <ButtonFmt {ws}/>
         </div>
