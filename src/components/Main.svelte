@@ -92,18 +92,5 @@ export let splitEditor = {}
   opacity: 0;
   transition: opacity 0.2s ease;
 }
-.panel.active {
-  display: block;
-  opacity: 1;
-  animation: fadeInPanel 0.2s ease;
-}
 
-  /* Bottom panel collapse states */
-    #bottom { transition: grid-template-rows 0.3s ease; }
-    #bottom.collapsed {
-      grid-template-rows: 36px 0 !important;
-    }
-    #bottom.collapsed .panel {
-      display: none !important;
-    }
     </style>

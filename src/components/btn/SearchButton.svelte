@@ -112,4 +112,11 @@
   })
 </script>
 
-        <button id="btn-search">Find in files</button>
+<button id="btn-search" >Find in files</button>
+
+<style>
+  #btn-search{
+    z-index: 1;
+  }
+
+</style>

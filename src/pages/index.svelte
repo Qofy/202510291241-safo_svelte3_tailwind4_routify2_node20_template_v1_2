@@ -272,144 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// document.getElementById('btn-clear').onclick = () => {
-//   const logEl = document.getElementById('log');
-//   const termEl = document.getElementById('termlog');
-//   const xtermEl = document.getElementById('xterm');
-
-//   if (logEl && logEl.style.display !== 'none') logEl.textContent='';
-//   if (termEl && termEl.style.display !== 'none') termEl.textContent='';
-//   if (xtermEl && xtermEl.style.display !== 'none' && terminal) terminal.clear();
-// };
-
-// document.getElementById('runner-start').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type:'runner_start' })); }
-// document.getElementById('runner-restart').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type:'runner_restart' })); }
-// document.getElementById('runner-stop').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type:'runner_stop' })); }
-
-// document.getElementById('toggle-sidebar').onclick = () => {
-//   const sb = document.getElementById('sidebar');
-//   const container = document.getElementById('container');
-//   const divider = document.getElementById('sidebar-divider');
-
-//   if (sb.classList.contains('hidden')) {
-//     sb.classList.remove('hidden');
-//     divider.style.display = 'block';
-//     const savedWidth = localStorage.getItem('sidebarWidth') || '300px';
-//     container.style.gridTemplateColumns = `${savedWidth} 4px 1fr`;
-//   } else {
-//     sb.classList.add('hidden');
-//     divider.style.display = 'none';
-//     container.style.gridTemplateColumns = '0px 0px 1fr';
-//   }
-
-//   setTimeout(() => {
-//     if (editor) editor.layout();
-//     if (editorSplit) editorSplit.layout();
-//   }, 0);
-// };
-
-// document.getElementById('btn-preview').onclick = () => togglePreview();
-
-// function togglePreview() {
-//   const isMd = currentPath && (currentPath.endsWith('.md') || currentPath.endsWith('.markdown'));
-//   if (!isMd) { previewEl.classList.add('hidden'); document.getElementById('editor-area').style.gridTemplateColumns = '1fr 0'; return; }
-//   if (previewEl.classList.contains('hidden')) {
-//     previewEl.classList.remove('hidden');
-//     document.getElementById('editor-area').style.gridTemplateColumns = '1fr 1fr';
-//     renderMarkdown();
-//   } else {
-//     previewEl.classList.add('hidden');
-//     document.getElementById('editor-area').style.gridTemplateColumns = '1fr 0';
-//   }
-// };
-// document.getElementById('btn-save').onclick = () => saveCurrentFile();
-
-// document.getElementById('btn-rust').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'lsp_spawn', lang: 'rust' })); };
-// document.getElementById('btn-ts').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'lsp_spawn', lang: 'ts' })); };
-// document.getElementById('btn-check').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'cargo', sub: 'check' })); };
-
-// document.getElementById('btn-search').onclick = async () => {
-//   const q = (document.getElementById('file-search').value || '').trim();
-//   if (!q) {
-//     toast('Please enter a search query', 2000);
-//     return;
-//   }
-
-//   setStatus('Searching...');
-//   const res = await fetch('http://127.0.0.1:8788/api/search?' + new URLSearchParams({ q, max: '500' }));
-//   const hits = await res.json();
-
-//   // Display results in search tab
-//   const searchResults = document.getElementById('search-results');
-//   searchResults.innerHTML = '';
-
-//   if (hits.length === 0) {
-//     searchResults.innerHTML = '<div style="padding: 16px; color: #9aa3b2;">No results found</div>';
-//     setStatus(`No results for "${q}"`);
-//     setTab('search');
-//     return;
-//   }
-
-//   // Group results by file
-//   const groupedByFile = {};
-//   for (const hit of hits) {
-//     if (!groupedByFile[hit.path]) {
-//       groupedByFile[hit.path] = [];
-//     }
-//     groupedByFile[hit.path].push(hit);
-//   }
-
-//   // Render grouped results
-//   for (const [filePath, fileHits] of Object.entries(groupedByFile)) {
-//     // File header
-//     const fileHeader = document.createElement('div');
-//     fileHeader.style.cssText = 'padding: 8px; background: #0e1420; border-bottom: 2px solid var(--border); font-weight: 600; color: var(--accent); position: sticky; top: 0;';
-//     fileHeader.textContent = `${filePath} (${fileHits.length} ${fileHits.length === 1 ? 'match' : 'matches'})`;
-//     searchResults.appendChild(fileHeader);
-
-//     // Results for this file
-//     for (const hit of fileHits) {
-//       const item = document.createElement('div');
-//       item.className = 'search-result-item';
-//       item.dataset.path = hit.path;
-//       item.dataset.line = hit.line;
-//       item.dataset.col = hit.col;
-
-//       // Location info
-//       const location = document.createElement('span');
-//       location.className = 'search-result-location';
-//       location.textContent = `Line ${hit.line}, Col ${hit.col}`;
-
-//       // Text with highlighted match
-//       const textDiv = document.createElement('div');
-//       textDiv.className = 'search-result-text';
-//       const highlightedText = hit.text.replace(
-//         new RegExp(q.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'), 'gi'),
-//         match => `<span class="search-result-match">${match}</span>`
-//       );
-//       textDiv.innerHTML = highlightedText;
-
-//       item.appendChild(location);
-//       item.appendChild(textDiv);
-
-//       // Click handler to open file
-//       item.onclick = () => {
-//         openFile(hit.path, { preserveCursor: false }).then(() => {
-//           if (editor) {
-//             editor.setPosition({ lineNumber: hit.line, column: hit.col });
-//             editor.revealLineInCenter(hit.line);
-//             editor.focus();
-//           }
-//         });
-//       };
-
-//       searchResults.appendChild(item);
-//     }
-//   }
-
-//   setStatus(`Found ${hits.length} results in ${Object.keys(groupedByFile).length} files`);
-//   setTab('search');
-// };
   });
 
   let isResizing=false;
@@ -1776,9 +1638,8 @@ function setupTerminalFileDetection() {
 // require(['vs/editor/editor.main', 'vs/basic-languages/toml/toml', 'vs/basic-languages/shell/shell', 'vs/basic-languages/http/http'], function () {
 
 </script>
-<!-- <Hello/> -->
- <TopBar {editor} {editorSplit} {splitViewActive}/>
-  <div id="container">
+<TopBar {editor} {editorSplit} {splitViewActive}/>
+<div id="container">
    <Sidebar/>
     <div class="divider-vertical" id="sidebar-divider"></div>
     <Main {splitViewActive} {editor} {editorSplit} {splitEditor}/>
@@ -1793,7 +1654,9 @@ function setupTerminalFileDetection() {
 <slot />
 
 <style>
-   #container { display: grid; grid-template-columns: 300px 4px 1fr; height: calc(100% - 44px); }
+   #container { display: grid; grid-template-columns: 300px 4px 1fr; height: calc(100% - 44px);
+  z-index: 1;
+  }
 
    /* Resizable dividers */
     .divider-vertical {
