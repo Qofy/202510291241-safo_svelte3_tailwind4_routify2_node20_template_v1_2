@@ -15,6 +15,7 @@ export let splitEditor ={}
     container.style.gridTemplateColumns = '1fr 4px 1fr';
     splitEditor.style.display = 'block';
     divider.style.display = 'block';
+     
 
     
     setTimeout(() => {

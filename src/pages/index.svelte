@@ -10,7 +10,8 @@
   import {onMount} from "svelte";
   import * as monaco from 'monaco-editor';
   import {Terminal} from "xterm";
-  import {FitAddon} from "xterm-addon-fit"
+  import {FitAddon} from "xterm-addon-fit";
+  import { WebLinksAddon } from 'xterm-addon-web-links';
   // import {fitAddon} from "xterm"
 
 	import TopBar from "../components/TopBar.svelte";
@@ -1207,16 +1208,15 @@ function renderMarkdown() {
 async function listFiles() {
   let res = {}
   try{
-   res = await fetch('http://127.0.0.1:8789/api/list');
+    res = await fetch('http://127.0.0.1:8789/api/list');
   }catch(e){
-    console.log("api List faild",e)
-    res = {
-      
-
-    }
+    console.log("api List failed", e)
+    res = {}
   }
+  
   const arr = await res.json();
   const root = {};
+  
   for (const p of arr) {
     const parts = p.split('/');
     let node = root;
@@ -1228,20 +1228,23 @@ async function listFiles() {
       if (isLast) { node[part] = { _files: {}, _open: false, _isDir: false }; }
     }
   }
+  
   filesEl.innerHTML = '';
   renderTree(filesEl, root, []);
-
-  // Setup file name search with debouncing
+  
+  // Add safety check
   const filterInput = document.getElementById('file-search');
-  let debounceTimer;
-  filterInput.oninput = () => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      filesEl.innerHTML = '';
-      const query = filterInput.value.toLowerCase();
-      renderTree(filesEl, root, query.split(/\\s+/).filter(Boolean));
-    }, 300); // 300ms debounce
-  };
+  if (filterInput) {
+    let debounceTimer;
+    filterInput.oninput = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        filesEl.innerHTML = '';
+        const query = filterInput.value.toLowerCase();
+        renderTree(filesEl, root, query.split(/\s+/).filter(Boolean));
+      }, 300);
+    };
+  }
 }
 
 function renderTree(rootEl, tree, filters) {
@@ -1397,7 +1400,7 @@ function ensureTerminalStarted() {
   termStarted = true;
   terminal = new Terminal({ cursorBlink: true, fontSize: 13, theme: { background: '#0b0e14', foreground: '#cbd5e1' } });
   fitAddon = new FitAddon();
-  const linkAddon = new window.WebLinksAddon.WebLinksAddon();
+  const linkAddon = new WebLinksAddon();
   terminal.loadAddon(fitAddon); terminal.loadAddon(linkAddon);
   terminal.open(xtermEl);
   setTimeout(() => { try { fitAddon.fit(); } catch {} }, 0);

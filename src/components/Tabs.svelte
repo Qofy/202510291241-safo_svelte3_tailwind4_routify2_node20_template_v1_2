@@ -26,6 +26,7 @@ let ws = null;
         </div>
 
         <style>
+              #tabs { display: flex; gap: 6px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; }
               .tab {
       padding: 6px 12px;
       border: 1px solid var(--border);

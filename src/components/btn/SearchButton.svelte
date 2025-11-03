@@ -116,7 +116,6 @@
 
 <style>
   #btn-search{
-    z-index: 1;
+    font-size: .8rem;
   }
-
 </style>
