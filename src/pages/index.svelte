@@ -1657,7 +1657,7 @@ function setupTerminalFileDetection() {
 <slot />
 
 <style>
-   #container { display: grid; grid-template-columns: 300px 4px 1fr; height: calc(100% - 44px);
+   #container { display: grid; grid-template-columns: 0px 4px 1fr; height: calc(100% - 44px);
   z-index: 1;
   }
 
