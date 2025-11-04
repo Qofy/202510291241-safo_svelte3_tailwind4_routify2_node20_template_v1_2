@@ -1163,6 +1163,20 @@ function showReloadPrompt(path){
 }
 
 function setTab(tab) {
+  // Expand bottom panel if collapsed
+  const bottomPanel = document.getElementById('bottom');
+  const mainPanel = document.getElementById('main');
+  if (bottomPanel && bottomPanel.classList.contains('collapsed')) {
+    bottomPanel.classList.remove('collapsed');
+    if (mainPanel) {
+      mainPanel.classList.remove('bottom-panel-collapsed');
+    }
+    const toggleBtn = document.getElementById('toggle-bottom-panel');
+    if (toggleBtn) {
+      toggleBtn.classList.remove('collapsed');
+    }
+  }
+
   // Update all tab active states
   for (const t of document.querySelectorAll('.tab')) {
     t.classList.toggle('active', t.dataset.tab === tab);
@@ -1208,7 +1222,7 @@ function renderMarkdown() {
 async function listFiles() {
   let res = {}
   try{
-    res = await fetch('http://127.0.0.1:8789/api/list');
+    res = await fetch('http://127.0.0.1:8788/api/list');
   }catch(e){
     console.log("api List failed", e)
     res = {}
@@ -1325,7 +1339,7 @@ async function openFile(p, opts = {}) {
     return;
   }
 
-  const url = 'http://127.0.0.1:8789/api/open?' + new URLSearchParams({ path: p });
+  const url = 'http://127.0.0.1:8788/api/open?' + new URLSearchParams({ path: p });
   const res = await fetch(url);
   const js = await res.json();
   if (js.ok) {
@@ -1468,7 +1482,7 @@ async function checkFileExists(path) {
     return fileExistsCache.get(path);
   }
   try {
-    const res = await fetch('http://127.0.0.1:8789/api/exists?' + new URLSearchParams({ path }));
+    const res = await fetch('http://127.0.0.1:8788/api/exists?' + new URLSearchParams({ path }));
     const data = await res.json();
     fileExistsCache.set(path, data.exists);
     return data.exists;
@@ -1657,9 +1671,7 @@ function setupTerminalFileDetection() {
 <slot />
 
 <style>
-   #container { display: grid; grid-template-columns: 0px 4px 1fr; height: calc(100% - 44px);
-  z-index: 1;
-  }
+     #container { display: grid; grid-template-columns: 300px 4px 1fr; height: calc(100% - 44px); }
 
    /* Resizable dividers */
     .divider-vertical {

@@ -7,9 +7,13 @@
 document.getElementById('toggle-bottom-panel').onclick = () => {
   const bottomPanel = document.getElementById('bottom');
   const toggleBtn = document.getElementById('toggle-bottom-panel');
+  const mainPanel = document.getElementById('main');
 
   bottomPanel.classList.toggle('collapsed');
   toggleBtn.classList.toggle('collapsed');
+  if (mainPanel) {
+    mainPanel.classList.toggle('bottom-panel-collapsed');
+  }
 
   // Trigger Monaco editor resize
   setTimeout(() => {
