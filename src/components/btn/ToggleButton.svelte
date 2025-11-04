@@ -12,7 +12,7 @@ document.getElementById('toggle-bottom-panel').onclick = () => {
   bottomPanel.classList.toggle('collapsed');
   toggleBtn.classList.toggle('collapsed');
   if (mainPanel) {
-    mainPanel.classList.toggle('bottom-panel-collapsed');
+    mainPanel.classList.toggle('bottom-pane-collapsed');
   }
 
   // Trigger Monaco editor resize

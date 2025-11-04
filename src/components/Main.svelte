@@ -56,7 +56,7 @@ export let splitEditor = {}
 <style>
  #main { display: flex; flex-direction: column; background: var(--bg2); height: 100%; }
     :global(#main.bottom-panel-collapsed) #editor-area { margin-bottom: 0; }
-    #editor-area { display: flex; flex-direction: column; flex: 1; margin-bottom: 264px; /* Space for fixed bottom panel */ transition: margin-bottom 0.3s ease; }
+    #editor-area { display: flex; flex-direction: column; flex: 1; margin-bottom: 0px; /* Space for fixed bottom panel */ transition: margin-bottom 0.3s ease; }
     #editor-tabs { display: flex; gap: 4px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; overflow-x: auto; }
     #editor-tabs::-webkit-scrollbar { height: 6px; }
     #editor-tabs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -64,7 +64,7 @@ export let splitEditor = {}
     #editor { height: 100%; }
     #editor-split { height: 100%; display: none; }
     #preview { border-left: 1px solid var(--border); padding: 12px; overflow: auto; background:#0a0f17; }
-    #bottom { border-top: 1px solid var(--border); background: #0c111b; display: grid; grid-template-rows: 36px 1fr; position: fixed; bottom: 0; left: 0; right: 0; height: 260px; z-index: 10; transition: height 0.3s ease; }
+    #bottom { border-top: 1px solid var(--border); background: #0c111b; display: grid; grid-template-rows: 36px 1fr; height: 260px; z-index: 10; transition: height 0.3s ease; }
     :global(#bottom.collapsed) { height: 36px; grid-template-rows: 36px 0; }
     :global(#main.bottom-panel-collapsed) #editor-area { margin-bottom: 36px; }
 .panel {
