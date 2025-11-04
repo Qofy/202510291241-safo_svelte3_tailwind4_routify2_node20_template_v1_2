@@ -9,10 +9,17 @@ document.getElementById('toggle-bottom-panel').onclick = () => {
   const toggleBtn = document.getElementById('toggle-bottom-panel');
   const mainPanel = document.getElementById('main');
 
+  if (!bottomPanel) {
+    console.error('Bottom panel not found');
+    return;
+  }
+
   bottomPanel.classList.toggle('collapsed');
-  toggleBtn.classList.toggle('collapsed');
+  if (toggleBtn) {
+    toggleBtn.classList.toggle('collapsed');
+  }
   if (mainPanel) {
-    mainPanel.classList.toggle('bottom-pane-collapsed');
+    mainPanel.classList.toggle('bottom-panel-collapsed');
   }
 
   // Trigger Monaco editor resize
@@ -53,6 +60,10 @@ document.getElementById('toggle-bottom-panel').onclick = () => {
       width: 16px;
       height: 16px;
       transition: transform 0.3s ease;
+    }
+    
+    .toggle-bottom-btn.collapsed svg {
+      transform: rotate(180deg);
     }
    
 </style>

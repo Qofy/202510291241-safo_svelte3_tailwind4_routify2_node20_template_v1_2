@@ -66,12 +66,17 @@ export let splitEditor = {}
     #preview { border-left: 1px solid var(--border); padding: 12px; overflow: auto; background:#0a0f17; }
     #bottom { border-top: 1px solid var(--border); background: #0c111b; display: grid; grid-template-rows: 36px 1fr; height: 260px; z-index: 10; transition: height 0.3s ease; }
     :global(#bottom.collapsed) { height: 36px; grid-template-rows: 36px 0; }
-    :global(#main.bottom-panel-collapsed) #editor-area { margin-bottom: 36px; }
+    :global(#main.bottom-panel-collapsed) #editor-area { margin-bottom: 0px; }
 .panel {
   display: none;
   overflow: auto;
   opacity: 0;
   transition: opacity 0.2s ease;
+}
+
+:global(.panel.active) {
+  display: block !important;
+  opacity: 1;
 }
 .divider-horizontal {
       height: 4px;
