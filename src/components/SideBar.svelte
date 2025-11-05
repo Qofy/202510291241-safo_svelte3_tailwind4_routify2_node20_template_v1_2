@@ -1,5 +1,17 @@
 <script>
+	import { onMount } from "svelte";
 
+
+onMount(()=>{
+
+document.getElementById('btn-search').onclick = async () => {
+  const q = (document.getElementById('file-search').value || '').trim(); if (!q) return;
+  const res = await fetch('/api/search?' + new URLSearchParams({ q, max: '200' }));
+  const hits = await res.json();
+  const out = hits.map(h => `${h.path}:${h.line}:${h.col}  ${h.text}`).join('\\n');
+  log(logEl, `-- search: "${q}" --\\n` + out + '\\n-- end --');
+};
+})
 </script>
 
 

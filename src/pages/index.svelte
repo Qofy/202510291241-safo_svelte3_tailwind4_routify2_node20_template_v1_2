@@ -3,6 +3,11 @@
   import Main from "../components/Main.svelte";
 import Sidebar from "../components/Sidebar.svelte";
 import TopBar from "../components/TopBar.svelte";
+ import * as monaco from "monaco-editor";
+import {Terminal} from "xterm";
+  import {FitAddon} from "xterm-addon-fit";
+  import { WebLinksAddon } from 'xterm-addon-web-links';
+
 
 onMount(()=>{
  let editor, ws, currentPath = null;
@@ -13,7 +18,6 @@ const logEl = document.getElementById('log');
 const termEl = document.getElementById('termlog');
 const filesEl = document.getElementById('files');
 const xtermEl = document.getElementById('xterm');
-const previewEl = document.getElementById('preview');
 
 function log(el, s) { el.textContent += s + "\\n"; el.scrollTop = el.scrollHeight; }
 function setStatus(s) { statusEl.textContent = s; }
@@ -63,20 +67,9 @@ document.getElementById('toggle-sidebar').onclick = () => {
   else { sb.classList.add('hidden'); container.style.gridTemplateColumns = '0px 1fr'; }
 };
 
-document.getElementById('btn-preview').onclick = () => togglePreview();
 
-function togglePreview() {
-  const isMd = currentPath && (currentPath.endsWith('.md') || currentPath.endsWith('.markdown'));
-  if (!isMd) { previewEl.classList.add('hidden'); document.getElementById('editor-area').style.gridTemplateColumns = '1fr 0'; return; }
-  if (previewEl.classList.contains('hidden')) {
-    previewEl.classList.remove('hidden');
-    document.getElementById('editor-area').style.gridTemplateColumns = '1fr 1fr';
-    renderMarkdown();
-  } else {
-    previewEl.classList.add('hidden');
-    document.getElementById('editor-area').style.gridTemplateColumns = '1fr 0';
-  }
-}
+
+
 function renderMarkdown() {
   if (!currentPath) return;
   const text = editor.getValue();
@@ -203,32 +196,14 @@ document.addEventListener('mouseup', async () => {
   }
 });
 
-document.getElementById('btn-save').onclick = async () => {
-  if (!currentPath) return;
-  const body = { path: currentPath, content: editor.getValue() };
-  const res = await fetch('http://127.0.0.1:8788/api/save', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(body) });
-  const js = await res.json();
-  if (!js.ok) log(logEl, 'save failed: ' + js.error);
-};
 
-document.getElementById('btn-rust').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'lsp_spawn', lang: 'rust' })); };
-document.getElementById('btn-ts').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'lsp_spawn', lang: 'ts' })); };
-document.getElementById('btn-check').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'cargo', sub: 'check' })); };
-
-document.getElementById('btn-search').onclick = async () => {
-  const q = (document.getElementById('file-search').value || '').trim(); if (!q) return;
-  const res = await fetch('/api/search?' + new URLSearchParams({ q, max: '200' }));
-  const hits = await res.json();
-  const out = hits.map(h => `${h.path}:${h.line}:${h.col}  ${h.text}`).join('\\n');
-  log(logEl, `-- search: "${q}" --\\n` + out + '\\n-- end --');
-};
 
 function ensureTerminalStarted() {
   if (termStarted) return;
   termStarted = true;
-  terminal = new window.Terminal({ cursorBlink: true, fontSize: 13, theme: { background: '#0b0e14', foreground: '#cbd5e1' } });
-  fitAddon = new window.FitAddon.FitAddon();
-  const linkAddon = new window.WebLinksAddon.WebLinksAddon();
+  terminal = new Terminal({ cursorBlink: true, fontSize: 13, theme: { background: '#0b0e14', foreground: '#cbd5e1' } });
+  fitAddon = new FitAddon();
+  const linkAddon = new WebLinksAddon();
   terminal.loadAddon(fitAddon); terminal.loadAddon(linkAddon);
   terminal.open(xtermEl);
   setTimeout(() => { try { fitAddon.fit(); } catch {} }, 0);
@@ -251,26 +226,28 @@ function ensureTerminalStarted() {
 }
 
 // require(['vs/editor/editor.main', 'vs/basic-languages/toml/toml', 'vs/basic-languages/shell/shell', 'vs/basic-languages/http/http'], function () {
-require(['vs/editor/editor.main',  'vs/basic-languages/shell/shell' ], 
-function () {
-  editor = monaco.editor.create(document.getElementById('editor'), {
-    value: '// Select a file on the left to open it.',
+
+       editor = monaco.editor.create(document.getElementById('editor'), {
+       value: '// Select a file on the left to open it.',
     language: 'plaintext',
     automaticLayout: true,
+    wordWrap: 'off',
+    scrollBeyondLastColumn: 5,
+    scrollbar: { horizontal: 'auto', vertical: 'auto', horizontalScrollbarSize: 12, verticalScrollbarSize: 12 },
     theme: 'vs-dark',
-    minimap: { enabled: false },
+    minimap: {
+      enabled: true,
+      size: 'proportional',
+      maxColumn: 120,
+      renderCharacters: true,
+      showSlider: 'always',
+      scale: 2
+    },
     fontLigatures: true,
     fontSize: 14,
-  });
-  editor.onDidChangeModelContent(() => {
-    if (currentPath && (currentPath.endsWith('.md') || currentPath.endsWith('.markdown')) && !previewEl.classList.contains('hidden')) {
-      renderMarkdown();
-    }
-  });
-  setWorkspacePath();
-  connectWS();
-  listFiles();
-});
+      
+    });
+
    })
 
 

@@ -120,11 +120,14 @@
   "dependencies": {
     "dompurify": "^3.3.0",
     "dotenv": "^16.6.1",
+    "editor": "^1.0.0",
     "lucide-svelte": "^0.513.0",
     "marked": "^16.4.1",
     "monaco": "^1.201704190613.0",
     "monaco-editor": "^0.54.0",
     "rxjs": "^7.8.2",
+    "shell": "^0.12.0",
+    "vs": "^0.1.0",
     "xterm": "^5.3.0",
     "xterm-addon-fit": "^0.8.0",
     "xterm-addon-web-links": "^0.9.0"

@@ -1,5 +1,37 @@
 <script>
+	import { onMount } from "svelte";
+let ws,currentPath = null;
 
+
+onMount(()=>{
+const previewEl = document.getElementById('preview');
+  document.getElementById('btn-preview').onclick = () => togglePreview();
+
+  document.getElementById('btn-save').onclick = async () => {
+  if (!currentPath) return;
+  const body = { path: currentPath, content: editor.getValue() };
+  const res = await fetch('http://127.0.0.1:8788/api/save', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(body) });
+  const js = await res.json();
+  if (!js.ok) log(logEl, 'save failed: ' + js.error);
+};
+
+document.getElementById('btn-rust').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'lsp_spawn', lang: 'rust' })); };
+document.getElementById('btn-ts').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'lsp_spawn', lang: 'ts' })); };
+document.getElementById('btn-check').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'cargo', sub: 'check' })); };
+
+function togglePreview() {
+  const isMd = currentPath && (currentPath.endsWith('.md') || currentPath.endsWith('.markdown'));
+  if (!isMd) { previewEl.classList.add('hidden'); document.getElementById('editor-area').style.gridTemplateColumns = '1fr 0'; return; }
+  if (previewEl.classList.contains('hidden')) {
+    previewEl.classList.remove('hidden');
+    document.getElementById('editor-area').style.gridTemplateColumns = '1fr 1fr';
+    renderMarkdown();
+  } else {
+    previewEl.classList.add('hidden');
+    document.getElementById('editor-area').style.gridTemplateColumns = '1fr 0';
+  }
+}
+})
 </script>
 
  <div id="topbar">
