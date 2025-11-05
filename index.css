@@ -11,3 +11,4 @@
 
   #preview code { background:#11192a; padding:2px 4px; border-radius:4px; }
     #preview pre { background:#0b1222; padding:10px; border-radius:10px; overflow:auto; }
+    .hidden { display:none !important; }
