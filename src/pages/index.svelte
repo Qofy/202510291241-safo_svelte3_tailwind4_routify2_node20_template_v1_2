@@ -1,16 +1,12 @@
 <script>
+  import Sidebar from "../components/Sidebar.svelte";
+import TopBar from "../components/TopBar.svelte";
 
 </script>
 
-
+<TopBar/>
   <div id="container">
-    <div id="sidebar">
-      <div id="sidebar-top">
-        <input id="file-search" type="text" placeholder="Search files by name…" />
-        <button id="btn-search">Find in files</button>
-      </div>
-      <ul id="files"></ul>
-    </div>
+   <Sidebar/>
     <div id="main">
       <div id="editor-area">
         <div id="editor"></div>
@@ -35,12 +31,8 @@
 
     button { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--btn); color: var(--text); cursor: pointer; }
     button:hover { background: var(--btnh); }
-    .tag { padding: 3px 8px; border:1px solid var(--border); border-radius:999px; color: var(--muted); }
     #container { display: grid; grid-template-columns: 300px 1fr; height: calc(100% - 44px); }
-    #sidebar { border-right: 1px solid var(--border); background: var(--panel); overflow: auto; display: flex; flex-direction: column; }
-    #sidebar-top { padding: 8px; display: flex; gap: 6px; align-items: center; border-bottom: 1px solid var(--border); }
-    #file-search { flex: 1 1 auto; background:#10131a; border:1px solid var(--border); border-radius:8px; padding:6px 8px; color: var(--text); }
-    #files { padding: 10px; margin: 0; list-style: none; font-size: 13px; }
+  
    
     #main { display: grid; grid-template-rows: 1fr 260px; background: var(--bg2); }
     #editor-area { display: grid; grid-template-columns: 1fr 0; }

@@ -18,4 +18,5 @@
         #topbar { height: 44px; display: flex; gap: 8px; align-items: center; padding: 0 12px; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #12151d, #0f121a); position: sticky; top: 0; z-index: 10; }
  .status { margin-left: auto; color: var(--muted); }
     .dim { color: var(--muted); }
+     .tag { padding: 3px 8px; border:1px solid var(--border); border-radius:999px; color: var(--muted); }
   </style>
