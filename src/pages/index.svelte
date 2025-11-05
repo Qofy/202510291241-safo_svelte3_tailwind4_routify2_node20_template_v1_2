@@ -18,13 +18,15 @@ const logEl = document.getElementById('log');
 const termEl = document.getElementById('termlog');
 const filesEl = document.getElementById('files');
 const xtermEl = document.getElementById('xterm');
+const previewEl = document.getElementById('preview');
+
 
 function log(el, s) { el.textContent += s + "\\n"; el.scrollTop = el.scrollHeight; }
 function setStatus(s) { statusEl.textContent = s; }
 function setWorkspacePath() { wsPathEl.textContent = location.host; }
 
 function connectWS() {
-  ws = new WebSocket(`ws://${location.host}/ws`);
+  ws = new WebSocket(`ws://127.0.0.1:8788/ws`);
   ws.onopen = () => setStatus('WS connected');
   ws.onmessage = (ev) => {
     try {
@@ -196,6 +198,10 @@ document.addEventListener('mouseup', async () => {
   }
 });
 
+// setWorkspacePath();
+// connectWS();
+// listFiles();
+
 
 
 function ensureTerminalStarted() {
@@ -227,29 +233,24 @@ function ensureTerminalStarted() {
 
 // require(['vs/editor/editor.main', 'vs/basic-languages/toml/toml', 'vs/basic-languages/shell/shell', 'vs/basic-languages/http/http'], function () {
 
-       editor = monaco.editor.create(document.getElementById('editor'), {
-       value: '// Select a file on the left to open it.',
+     editor = monaco.editor.create(document.getElementById('editor'), {
+    value: '// Select a file on the left to open it.',
     language: 'plaintext',
     automaticLayout: true,
-    wordWrap: 'off',
-    scrollBeyondLastColumn: 5,
-    scrollbar: { horizontal: 'auto', vertical: 'auto', horizontalScrollbarSize: 12, verticalScrollbarSize: 12 },
     theme: 'vs-dark',
-    minimap: {
-      enabled: true,
-      size: 'proportional',
-      maxColumn: 120,
-      renderCharacters: true,
-      showSlider: 'always',
-      scale: 2
-    },
+    minimap: { enabled: false },
     fontLigatures: true,
     fontSize: 14,
-      
-    });
-
-   })
-
+  });
+  editor.onDidChangeModelContent(() => {
+    if (currentPath && (currentPath.endsWith('.md') || currentPath.endsWith('.markdown')) && !previewEl.classList.contains('hidden')) {
+      renderMarkdown();
+    }
+  });
+  setWorkspacePath();
+  connectWS();
+  listFiles();
+});
 
 </script>
 
