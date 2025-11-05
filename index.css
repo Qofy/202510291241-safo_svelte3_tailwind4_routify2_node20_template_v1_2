@@ -12,3 +12,7 @@
   #preview code { background:#11192a; padding:2px 4px; border-radius:4px; }
     #preview pre { background:#0b1222; padding:10px; border-radius:10px; overflow:auto; }
     .hidden { display:none !important; }
+
+        button { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--btn); color: var(--text); cursor: pointer; }
+    button:hover { background: var(--btnh); }
+   
