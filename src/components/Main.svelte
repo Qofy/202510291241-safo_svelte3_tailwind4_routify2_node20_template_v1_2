@@ -1,78 +1,81 @@
 <script>
-	import ToggleBtn from "./ToggleBtn.svelte";
-
+  import ToggleBtn from "./ToggleBtn.svelte";
+  import FileTabs from "./FileTabs.svelte";
+  
+  // You'll need to pass these from parent or manage here
+  export let openFiles = [];
+  export let currentFile = null;
+  export let onFileSelect = () => {};
+  export let onFileClose = () => {};
 </script>
 
-  <div id="main">
-      <div id="editor-area">
-        <div id="editor"></div>
-        <div id="preview" class="hidden"></div>
-      </div>
-      <div id="bottom">
-        <div id="tabs">
-          <ToggleBtn/>
-          <div class="tab active" data-tab="lsp">LSP</div>
-          <div class="tab" data-tab="terminal">Terminal</div>
-          <div class="tab" data-tab="runner">Runner</div>
-          <button id="runner-start">Start</button>
-          <button id="runner-restart">Restart</button>
-          <button id="runner-stop">Stop</button>
-        </div>
-        <div id="log"></div>
-        <div id="xterm"></div>
-        <div id="termlog"></div>
-      </div>
+<div id="main">
+  <div id="editor-area">
+    <!-- Add FileTabs here -->
+    <div id="editor-container">
+      <FileTabs 
+        {openFiles} 
+        {currentFile} 
+        {onFileSelect} 
+        {onFileClose} 
+      />
+      <div id="editor"></div>
     </div>
+    <div id="preview" class="hidden"></div>
+  </div>
+  <div id="bottom">
+    <div id="tabs">
+      <ToggleBtn/>
+      <div class="tab active" data-tab="lsp">LSP</div>
+      <div class="tab" data-tab="terminal">Terminal</div>
+      <div class="tab" data-tab="runner">Runner</div>
+      <button id="runner-start">Start</button>
+      <button id="runner-restart">Restart</button>
+      <button id="runner-stop">Stop</button>
+    </div>
+    <div id="log"></div>
+    <div id="xterm"></div>
+    <div id="termlog"></div>
+  </div>
+</div>
 
-    <style>
-   
+<style>
+  #main { 
+    display: grid; 
+    grid-template-rows: 1fr 350px; 
+    background: var(--bg2); 
+    overflow: hidden;
+    transition: grid-template-rows 0.3s ease;
+  }
   
-   
-    /* 
-    ═══════════════════════════════════════════════════════════════
-    ADJUST BOTTOM PANEL HEIGHT HERE:
-    Change "350px" to your desired height (300px, 400px, 450px, etc.)
-    ═══════════════════════════════════════════════════════════════
-    */
-    #main { 
-      display: grid; 
-      grid-template-rows: 1fr 350px;  /* <-- CHANGE THIS VALUE */
-      background: var(--bg2); 
-      overflow: hidden;
-      transition: grid-template-rows 0.3s ease;
-    }
-    
-    /* When collapsed, only show the tab bar */
-      
-    #editor-area { display: grid; grid-template-columns: 1fr 0; }
-    #editor { height: 100%; }
-    #preview { border-left: 1px solid var(--border); padding: 12px; overflow: auto; background:#0a0f17; }
-    
-    #bottom { 
-      border-top: 1px solid var(--border); 
-      background: #0c111b; 
-      display: grid; 
-      grid-template-rows: 36px 1fr; 
-      flex-shrink: 0;
-      /* overflow: hidden; */
-      transition: grid-template-rows 0.3s ease;
-    }
-    
-    /* Hide content area when collapsed */ 
-    
-    #tabs { display: flex; gap: 6px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; flex-shrink: 0;}
-    .tab { padding:6px 10px; border:1px solid var(--border); border-radius:8px; background:#111724; cursor:pointer; }
-    .tab.active { background:#172034; color: var(--accent); }
-    #log, #termlog, #xterm { padding: 8px; overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; white-space: pre-wrap; }
-    #log { display: block; }
-    #termlog { display: none; }
-    #xterm { display:none; height: 100%; padding: 0; }
-
-      #editor-tabs { display: flex; gap: 4px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; overflow-x: auto; flex-shrink: 0; }
-    #editor-tabs::-webkit-scrollbar { height: 6px; }
-    #editor-tabs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-     #editor-container { flex: 1; display: grid; grid-template-columns: 1fr 0; position: relative; min-height: 0; }
-    #editor { height: 100%; }
-    #editor-split { height: 100%; display: none; }
-   
-    </style>
+  /* #main.bottom-panel-collapsed { 
+    grid-template-rows: 1fr 36px; 
+  } */
+  
+  #editor-area { display: grid; grid-template-columns: 1fr 0; }
+  #editor-container { display: flex; flex-direction: column; height: 100%; }
+  #editor { flex: 1; height: 100%; }
+  #preview { border-left: 1px solid var(--border); padding: 12px; overflow: auto; background:#0a0f17; }
+  
+  #bottom { 
+    border-top: 1px solid var(--border); 
+    background: #0c111b; 
+    display: grid; 
+    grid-template-rows: 36px 1fr; 
+    flex-shrink: 0;
+    overflow: hidden;
+    transition: grid-template-rows 0.3s ease;
+  }
+  
+  /* #bottom.collapsed { 
+    grid-template-rows: 36px 0; 
+  } */
+  
+  #tabs { display: flex; gap: 6px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; }
+  .tab { padding:6px 10px; border:1px solid var(--border); border-radius:8px; background:#111724; cursor:pointer; }
+  .tab.active { background:#172034; color: var(--accent); }
+  #log, #termlog, #xterm { padding: 8px; overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; white-space: pre-wrap; }
+  #log { display: block; }
+  #termlog { display: none; }
+  #xterm { display:none; height: 100%; padding: 0; }
+</style>
