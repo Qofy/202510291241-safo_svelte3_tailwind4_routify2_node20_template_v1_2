@@ -38,3 +38,24 @@
       margin: 0;
       padding: 0;
     }
+
+       .toggle-bottom-btn.collapsed svg {
+      transform: rotate(180deg);
+    }
+      .toggle-bottom-btn.collapsed svg {
+      transform: rotate(180deg);
+    }
+     #bottom.collapsed {
+      grid-template-rows: 36px 0 !important;
+    }
+    /* When bottom panel is collapsed, change the main container's grid */
+#main.bottom-panel-collapsed {
+  grid-template-rows: 1fr 36px !important;  /* Only show the tab bar height */
+}
+
+#main.bottom-panel-collapsed { 
+      grid-template-rows: 1fr 36px; 
+    }
+#bottom.collapsed { 
+   grid-template-rows: 36px 0; 
+  }
