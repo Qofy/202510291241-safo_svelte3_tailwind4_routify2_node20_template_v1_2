@@ -3,7 +3,12 @@
 
 
 onMount(()=>{
-
+document.getElementById('toggle-sidebar').onclick = () => {
+  const sb = document.getElementById('sidebar');
+  const container = document.getElementById('container');
+  if (sb.classList.contains('hidden')) { sb.classList.remove('hidden'); container.style.gridTemplateColumns = '300px 1fr'; }
+  else { sb.classList.add('hidden'); container.style.gridTemplateColumns = '0px 1fr'; }
+};
 document.getElementById('btn-search').onclick = async () => {
   const q = (document.getElementById('file-search').value || '').trim(); if (!q) return;
   const res = await fetch('/api/search?' + new URLSearchParams({ q, max: '200' }));

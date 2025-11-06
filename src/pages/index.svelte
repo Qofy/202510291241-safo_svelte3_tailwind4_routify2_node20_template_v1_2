@@ -62,15 +62,6 @@ document.getElementById('runner-start').onclick = () => { if (ws && ws.readyStat
 document.getElementById('runner-restart').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type:'runner_restart' })); }
 document.getElementById('runner-stop').onclick = () => { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type:'runner_stop' })); }
 
-document.getElementById('toggle-sidebar').onclick = () => {
-  const sb = document.getElementById('sidebar');
-  const container = document.getElementById('container');
-  if (sb.classList.contains('hidden')) { sb.classList.remove('hidden'); container.style.gridTemplateColumns = '300px 1fr'; }
-  else { sb.classList.add('hidden'); container.style.gridTemplateColumns = '0px 1fr'; }
-};
-
-
-
 
 function renderMarkdown() {
   if (!currentPath) return;
