@@ -59,3 +59,7 @@
 #bottom.collapsed { 
    grid-template-rows: 36px 0; 
   }
+
+#sidebar.hidden {
+  display: none;
+}

@@ -14,24 +14,7 @@
       });
     }
 
-    // Toggle sidebar visibility
-    const toggleBtn = document.getElementById('toggle-sidebar');
-    if (toggleBtn) {
-      toggleBtn.onclick = () => {
-        const sb = document.getElementById('sidebar');
-        const container = document.getElementById('container');
-        if (sb && container) {
-          if (sb.classList.contains('hidden')) { 
-            sb.classList.remove('hidden'); 
-            container.style.gridTemplateColumns = '300px 1fr'; 
-          } else { 
-            sb.classList.add('hidden'); 
-            container.style.gridTemplateColumns = '0px 1fr'; 
-          }
-        }
-      };
-    }
-
+  
     // Search in file contents
     const searchBtn = document.getElementById('btn-search');
     if (searchBtn) {

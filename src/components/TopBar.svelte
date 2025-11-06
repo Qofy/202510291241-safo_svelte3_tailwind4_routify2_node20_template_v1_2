@@ -5,6 +5,27 @@ let ws,currentPath = null;
 
 onMount(()=>{
 const previewEl = document.getElementById('preview');
+  // Toggle sidebar visibility
+    const toggleSidebarBtn = document.getElementById('toggle-sidebar');
+  if (toggleSidebarBtn) {
+    toggleSidebarBtn.onclick = () => {
+      const sb = document.getElementById('sidebar');
+      const container = document.getElementById('container');
+      if (sb && container) {
+        if (sb.classList.contains('hidden')) {
+          //show 
+          sb.classList.remove('hidden'); 
+          container.style.gridTemplateColumns="300px 1fr"
+        } else { 
+          //hide
+          sb.classList.add('hidden');
+          container.style.gridTemplateColumns = '1fr' 
+        }
+      }
+    };
+  }
+
+
   document.getElementById('btn-preview').onclick = () => togglePreview();
 
   document.getElementById('btn-save').onclick = async () => {
@@ -51,4 +72,5 @@ function togglePreview() {
  .status { margin-left: auto; color: var(--muted); }
     .dim { color: var(--muted); }
      .tag { padding: 3px 8px; border:1px solid var(--border); border-radius:999px; color: var(--muted); }
+
   </style>
