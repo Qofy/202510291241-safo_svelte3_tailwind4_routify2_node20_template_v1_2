@@ -67,5 +67,12 @@
     #log { display: block; }
     #termlog { display: none; }
     #xterm { display:none; height: 100%; padding: 0; }
+
+      #editor-tabs { display: flex; gap: 4px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--border); background: #0e1420; overflow-x: auto; flex-shrink: 0; }
+    #editor-tabs::-webkit-scrollbar { height: 6px; }
+    #editor-tabs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+     #editor-container { flex: 1; display: grid; grid-template-columns: 1fr 0; position: relative; min-height: 0; }
+    #editor { height: 100%; }
+    #editor-split { height: 100%; display: none; }
    
     </style>
